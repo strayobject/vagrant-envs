@@ -10,8 +10,9 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu-server-12.04-base"
-
+  config.vm.box = "ubuntu-server-14.04-base-up01"
+  config.vm.define :mizzenlite do |t|
+  end
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
   # config.vm.box_url = "http://domain.com/path/to/above.box"
@@ -53,7 +54,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   #   vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
-    vb.customize ["modifyvm", :id, "--memory", "1024"]
+    vb.customize ["modifyvm", :id, "--memory", "512"]
   end
   #
   # View the documentation for the provider you're using for more
@@ -61,16 +62,16 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/apache-php.sh"
   
-  config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/apache-config-mizzenlite.sh"
-
   config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/git.sh"
 
   config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/phpmodern.sh"
 
   config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/vim.sh"
 
-  config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/mizzenlite.sh"
-
+  config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/apache-config-mizzenlite.sh"
+  config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/apache-config-glasgowphp.sh"
+  config.vm.provision :shell, :path => "/home/mike/server/vagrant/provision/apache-config-plainmotif.sh"
+  
   # Enable provisioning with Puppet stand alone.  Puppet manifests
   # are contained in a directory path relative to this Vagrantfile.
   # You will need to create the manifests directory and a manifest in
